@@ -1,78 +1,128 @@
 import { LightningElement, wire, track, api } from 'lwc';
 import getContactsData from '@salesforce/apex/AccountHelper.getSingleAccountRelatedContacts'; 
+import getOpportunitiesData from '@salesforce/apex/AccountHelper.getSingleAccountRelatedOportunitties'; 
 import { NavigationMixin } from 'lightning/navigation';
-
-
+// Import custom labels
+import createdDateLabel from "@salesforce/label/c.CreatedDateLabel";
+import contactRelationsLabel from "@salesforce/label/c.ContactRelationsLabel";
+import contactsLabel from "@salesforce/label/c.ContactsLabel";
+import opportunitiesLabel from "@salesforce/label/c.OpportunitiesLabel";
 
 export default class LWCAccountCardTabSet extends  NavigationMixin(LightningElement)  {
-@api accountId; 
-@api accountContactRelations;
+@api account; 
+@track accountContactRelationsSum;
+@track accountContactsSum;
+@track accountOpportunitiesSum;
 @track contacts;
-
-
-@track loadedOportunities = false;
+@track opportunities;
 @track  section = '';
 
+ // Expose the labels to use in the template.
+ label = {
+    createdDateLabel, 
+    contactRelationsLabel,
+    contactsLabel, 
+    opportunitiesLabel
+  };
 
- // LIFECYCLE HOOKS:
- connectedCallback() { 
-    this.loadedOportunities = true;
- }
+// LIFECYCLE HOOKS:
+connectedCallback() { 
+    this.accountContactRelationsSum = this.account.AccountContactRelations; 
+    this.accountContactsSum = this.account.ContactsSum__c;
+    this.accountOpportunitiesSum = this.account.OpportunitiesSum__;
+}
 
- renderedCallback() { }
-
-
- handleSectionToggle(event) {
-     this.section = event.detail.openSections;
- }
+renderedCallback() { }
 
 
- navigateToContactRelation(event) {
+handleSectionToggle(event) {
+    this.section = event.detail.openSections;
+}
+
+
+navigateToContactRelation(event) {
+const contactRelationId = event.target.dataset.id;
+this[NavigationMixin.Navigate]({
+    type: 'standard__recordPage',
+    attributes: {
+        recordId: contactRelationId,
+        objectApiName: 'AccountContactRelation',
+        actionName: 'view'
+    }
+});
+}
+
+navigateToContact(event) {
+const contactId = event.target.dataset.id;
+this[NavigationMixin.Navigate]({
+    type: 'standard__recordPage',
+    attributes: {
+        recordId: contactId,
+        objectApiName: 'Contact',
+        actionName: 'view'
+    }
+});
+}
+
+
+loadRelatedContacts(event) {
+const accountId = event.target.dataset.id;
+getContactsData({ accountId: accountId })
+.then(result => {
+    this.contacts = result;
+})
+.catch(error => {
+    console.error(error);
+});
+}
+
+
+loadRelatedOpportunities(event) {
+const accountId = event.target.dataset.id;
+getOpportunitiesData({ accountId: accountId })
+.then(result => {
+    this.opportunities = result;
+})
+.catch(error => {
+    console.error(error);
+});
+}
+
+navigateToOpportunity(event) {
+const opportunityId = event.target.dataset.id;
+this[NavigationMixin.Navigate]({
+    type: 'standard__recordPage',
+    attributes: {
+        recordId: opportunityId,
+        objectApiName: 'Opportunity',
+        actionName: 'view'
+    }
+});
+}
+
+
+showEditModal(event) {
     const contactRelationId = event.target.dataset.id;
     this[NavigationMixin.Navigate]({
         type: 'standard__recordPage',
         attributes: {
             recordId: contactRelationId,
             objectApiName: 'AccountContactRelation',
-            actionName: 'view'
+            actionName: 'edit'
         }
     });
-}
-
-navigateToContact(event) {
-    const contactId = event.target.dataset.id;
-    this[NavigationMixin.Navigate]({
-        type: 'standard__recordPage',
-        attributes: {
-            recordId: contactId,
-            objectApiName: 'Contact',
-            actionName: 'view'
-        }
-    });
-}
-
- 
-loadRelatedContacts(event) {
-    const accountId = event.target.dataset.id;
-    getContactsData({ accountId: accountId })
-    .then(result => {
-        this.contacts = result;
-    })
-    .catch(error => {
-        console.error(error);
-    });
-}
+    }
 
 get contactRelationsAccordionLabel() {
-    return 'Contact Relations ('+(this.accountContactRelations ? this.accountContactRelations.length : 0) + ')';
+return this.label.contactRelationsLabel + ' (' + (this.accountContactRelationsSum ? this.accountContactRelationsSum.length : 0)  + ')';
 }
 
 get contactsAccordionLabel() {
-    return 'Contacts ('+(this.contacts ? this.contacts.length : 0) + ')';
+return this.label.contactsLabel + ' (' + (this.accountContactsSum ? this.accountContactsSum : 0) + ')'; // this.contacts.length
 }
 
 get oppurtunitiesAccordionLabel() {
-    return 'Opportunities ('+(this.opportunities ? this.opportunities.length : 0) + ')';        
+return this.label.opportunitiesLabel + ' (' + (this.accountOpportunitiesSum ? this.accountOpportunitiesSum : 0) + ')';       // this.opportunities.length 
 }
 
 

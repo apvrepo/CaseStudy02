@@ -14,7 +14,7 @@ public without sharing class AccountHelper {
      @AuraEnabled(cacheable=true)
     public static List<Account> getAccounts() {
         return [
-            SELECT Id, Name, TickerSymbol, AnnualRevenue, Business_Users__c, Decision_Makers__c, 
+            SELECT Id, Name, TickerSymbol, AnnualRevenue, Business_Users__c, Decision_Makers__c, OpportunitiesSum__c, ContactsSum__c,
             (SELECT Id, CreatedDate, Contact.Name FROM AccountContactRelations ORDER BY Contact.Name ASC)
             FROM Account
             ORDER BY Name ASC
@@ -33,7 +33,7 @@ public without sharing class AccountHelper {
          @AuraEnabled(cacheable=true)
     public static List<Opportunity> getSingleAccountRelatedOportunitties(Id accountId) {
         return [
-            SELECT Id, Name
+            SELECT Id, Name, Amount, AccountId
             FROM Opportunity
             WHERE AccountId = :accountId
             ORDER BY Name ASC

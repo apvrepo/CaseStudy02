@@ -17,20 +17,20 @@
                                     </lightning-button>
                                 </div>
                                 <div class="slds-var-m-top_small slds-text-body_small">
-                                    <strong>Ticker Symbol:</strong> {account.TickerSymbol}
+                                    <strong>{label.tickerSymbolLabel}:</strong> {account.TickerSymbol}
                                 </div>
                                 <div class="slds-var-m-top_small slds-text-body_small">
-                                    <strong>Annual Revenue:</strong> <lightning-formatted-number format-style="currency"
+                                    <strong>{label.annualRevenueLabel}: </strong> <lightning-formatted-number format-style="currency"
                                         value={account.AnnualRevenue}
                                         minimum-fraction-digits="0"></lightning-formatted-number>
                                 </div>
                                 <div class="slds-var-m-top_small slds-text-body_small">
-                                    <strong>Business Users:</strong> {account.Business_Users__c}
+                                    <strong>{label.businessUsersLabel}:</strong> {account.Business_Users__c}
                                 </div>
                                 <div class="slds-var-m-top_small slds-text-body_small">
-                                    <strong>Decision Makers:</strong> {account.Decision_Makers__c}
+                                    <strong>{label.decisionMakersLabel}:</strong> {account.Decision_Makers__c}
                                 </div>
-                                <c-l-w-c-account-card-tab-set account-id={account.Id} account-contact-relations={account.AccountContactRelations}></c-l-w-c-account-card-tab-set>
+                                <c-l-w-c-account-card-tab-set account={account}></c-l-w-c-account-card-tab-set>
                             </div>
                         </div>
                     </template>

@@ -1,10 +1,24 @@
 import { LightningElement, wire, track } from 'lwc';
 import getAccountData from '@salesforce/apex/AccountHelper.getAccounts';
 import { NavigationMixin } from 'lightning/navigation';
+// Import custom labels
+import tickerSymbolLabel from "@salesforce/label/c.TickerSymbolLabel";
+import annualRevenueLabel from "@salesforce/label/c.AnnualRevenueLabel";
+import businessUsersLabel from "@salesforce/label/c.BusinessUsersLabel";
+import decisionMakersLabel from "@salesforce/label/c.DecisionMakersLabel";
+
+
 
 export default class LWCPage extends NavigationMixin(LightningElement) {
     @track loaded = false;
     @track accounts;
+ // Expose the labels to use in the template.
+ label = {
+    tickerSymbolLabel,
+    annualRevenueLabel, 
+    businessUsersLabel, 
+    decisionMakersLabel
+  };
 
     // LIFECYCLE HOOKS:
     connectedCallback() { }
