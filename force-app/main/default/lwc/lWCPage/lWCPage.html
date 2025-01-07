@@ -10,7 +10,7 @@
                 <template if:true={accounts}>
                     <template for:each={accounts} for:item="account">
                         <div key={account.Id} class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-4 slds-var-p-around_small">
-                            <div class="slds-box slds-box_link slds-theme_default slds-var-p-around_small">
+                            <div class="cardStyle slds-box slds-box_link slds-theme_default slds-var-p-around_medium"> 
                                 <div class="slds-text-heading_medium">
                                     <lightning-button variant="base" label={account.Name} data-id={account.Id}
                                         onclick={navigateToAccount} class="slds-var-m-right_x-small">

@@ -1,4 +1,5 @@
 <template>
+    <div class="accordionStyle slds-scrollable_y" tabindex="0">
     <lightning-accordion active-section-name={section} onsectiontoggle={handleSectionToggle}>
         <lightning-accordion-section name="A" label={contactRelationsAccordionLabel} aria-expanded="false">
             <template if:false={account.AccountContactRelations}>
@@ -10,18 +11,18 @@
                 <template for:each={account.AccountContactRelations} for:item="contactRelation">
                     <div key={contactRelation.Id}>
                         <div class="slds-grid slds-gutters slds-var-p-around_xx-small">
-                            <div class="slds-col slds-size_1-of-3">
+                            <div class="slds-col slds-size_2-of-5">
                                 <lightning-button variant="base" label={contactRelation.Contact.Name}
                                     data-id={contactRelation.Id} onclick={navigateToContactRelation}>
                                 </lightning-button>
                             </div>
-                            <div class="slds-col slds-size_1-of-3">
+                            <div class="slds-col slds-size_2-of-5">
                                 <div class="slds-p-top_xx-small">
                                     <lightning-formatted-date-time
                                         value={contactRelation.CreatedDate}></lightning-formatted-date-time>
                                 </div>
                             </div>
-                                <div class="slds-col slds-size_1-of-3">
+                                <div class="slds-col slds-size_1-of-5">
                                     <lightning-button-menu alternative-text="Show menu" menu-alignment="auto">
                                         <lightning-menu-item value="edit" label="Edit" data-id={contactRelation.Id}
                                             onclick={showEditModal}></lightning-menu-item>
@@ -71,7 +72,7 @@
                 <template for:each={opportunities} for:item="opportunity">
                     <div key={opportunity.Id}>
                         <div class="slds-grid slds-wrap">
-                            <div class="slds-col slds-size_3-of-4">
+                            <div class="slds-col slds-size_3-of-4 slds-truncate">
                                 <lightning-button variant="base" label={opportunity.Name} data-id={opportunity.Id}
                                     onclick={navigateToOpportunity}>
                                 </lightning-button>
@@ -90,4 +91,5 @@
             </template>
         </lightning-accordion-section>
     </lightning-accordion>
+</div>
 </template>
