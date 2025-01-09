@@ -47,7 +47,7 @@ public class AccountHelperTest {
         for (Account acc : accounts) {
             if (acrMap.containsKey(acc.Id)) {
                 for (AccountContactRelation acr : acrMap.get(acc.Id)) {
-                    acr.Roles = 'Besluitvormer';
+                    acr.Roles = 'Decision Maker';
                 }
             }
         }

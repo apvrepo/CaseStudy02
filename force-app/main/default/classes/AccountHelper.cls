@@ -69,10 +69,10 @@ public without sharing class AccountHelper {
                     // Split the Roles field by semicolon and check each value
                     List<String> roles = acr.Roles.split(';');
                     for (String role : roles) {
-                        if (role.equals('Besluitvormer')) { // Decision Maker
+                        if (role.equals('Decision Maker')) { // Decision Maker
                             decisionMakersCount++;
                         } 
-                        if (role.equals('Zakelijke gebruiker')) { // Business User
+                        if (role.equals('Business User')) { // Business User
                             businessUsersCount++;
                         }
                     }
