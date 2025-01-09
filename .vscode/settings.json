@@ -4,5 +4,5 @@
     "**/bower_components": true,
     "**/.sfdx": true
   },
-  "vlocity.sfdxUsername": "andres@topemployersinstitute.com"
+  "vlocity.sfdxUsername": "TEI_Org_02"
 }

@@ -1,32 +1,41 @@
 <template>
+    <div class="accordionStyle slds-scrollable_y" tabindex="0">
     <lightning-accordion active-section-name={section} onsectiontoggle={handleSectionToggle}>
         <lightning-accordion-section name="A" label={contactRelationsAccordionLabel} aria-expanded="false">
-            <template if:false={accountContactRelations}>
+            <template if:false={account.AccountContactRelations}>
                 <div class="exampleHolder">
                     <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
                 </div>
             </template>
-            <template if:true={accountContactRelations}>
-                <template for:each={accountContactRelations} for:item="contactRelation">
+            <template if:true={account.AccountContactRelations}>
+                <template for:each={account.AccountContactRelations} for:item="contactRelation">
                     <div key={contactRelation.Id}>
-                        <div class="slds-grid slds-gutters">
-                            <div class="slds-col">
+                        <div class="slds-grid slds-gutters slds-var-p-around_xx-small">
+                            <div class="slds-col slds-size_2-of-5">
                                 <lightning-button variant="base" label={contactRelation.Contact.Name}
-                                    data-id={contactRelation.Id} onclick={navigateToContactRelation}>
+                                    data-id={contactRelation.Id} data-object="AccountContactRelation" onclick={navigateToRecord}>
                                 </lightning-button>
                             </div>
-                            <div class="slds-col">
+                            <div class="slds-col slds-size_2-of-5">
                                 <div class="slds-p-top_xx-small">
-                                    <strong>Created Date: </strong><lightning-formatted-date-time value={contactRelation.CreatedDate}></lightning-formatted-date-time> 
+                                    <lightning-formatted-date-time
+                                        value={contactRelation.CreatedDate}></lightning-formatted-date-time>
                                 </div>
+                            </div>
+                                <div class="slds-col slds-size_1-of-5">
+                                    <lightning-button-menu alternative-text="Show menu" menu-alignment="auto">
+                                        <lightning-menu-item value="edit" label="Edit" data-id={contactRelation.Id}
+                                            onclick={showEditModal}></lightning-menu-item>
+                                    </lightning-button-menu>
                                 </div>
+                            
                         </div>
                     </div>
                 </template>
             </template>
         </lightning-accordion-section>
-        <lightning-accordion-section name="B" label={contactsAccordionLabel}
-        data-id={accountId} onclick={loadRelatedContacts}>
+        <lightning-accordion-section name="B" label={contactsAccordionLabel} data-id={account.Id}
+            onclick={loadRelatedContacts}>
             <template if:false={contacts}>
                 <div class="exampleHolder">
                     <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
@@ -36,32 +45,51 @@
                 <template for:each={contacts} for:item="contact">
                     <div key={contact.Id}>
                         <div class="slds-grid slds-gutters">
-                            <div class="slds-col">
-                                <lightning-button variant="base" label={contact.Name}
-                                    data-id={contact.Id} onclick={navigateToContact}>
+                            <div class="slds-col slds-size_1-of-2">
+                                <lightning-button variant="base" label={contact.Name} data-id={contact.Id}
+                                data-object="Contact" onclick={navigateToRecord}>
                                 </lightning-button>
                             </div>
-                            <div class="slds-col">
+                            <div class="slds-col slds-size_1-of-2">
                                 <div class="slds-p-top_xx-small">
-                                    <strong>Created Date: </strong><lightning-formatted-date-time value={contact.CreatedDate}></lightning-formatted-date-time> 
+                                    <strong>{label.createdDateLabel}: </strong><lightning-formatted-date-time
+                                        value={contact.CreatedDate}></lightning-formatted-date-time>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </template>
-
             </template>
         </lightning-accordion-section>
-        <lightning-accordion-section name="C" label={oppurtunitiesAccordionLabel}>
-            <template if:false={loadedOportunities}>
+        <lightning-accordion-section name="C" label={oppurtunitiesAccordionLabel} data-id={account.Id}
+            onclick={loadRelatedOpportunities}>
+            <template if:false={opportunities}>
                 <div class="exampleHolder">
                     <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
                 </div>
             </template>
-            <template if:true={loadedOportunities}>
-                Three Content !
-
+            <template if:true={opportunities}>
+                <template for:each={opportunities} for:item="opportunity">
+                    <div key={opportunity.Id}>
+                        <div class="slds-grid slds-wrap">
+                            <div class="slds-col slds-size_3-of-4 slds-truncate">
+                                <lightning-button variant="base" label={opportunity.Name} data-id={opportunity.Id}
+                                data-object="Opportunity" onclick={navigateToRecord}>
+                                </lightning-button>
+                            </div>
+                            <div class="slds-col slds-size_1-of-4">
+                                <div class="slds-p-top_xx-small">
+                                    <strong>
+                                        <lightning-formatted-number format-style="currency" value={opportunity.Amount}
+                                            minimum-fraction-digits="0"></lightning-formatted-number>
+                                    </strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </template>
             </template>
         </lightning-accordion-section>
     </lightning-accordion>
+</div>
 </template>

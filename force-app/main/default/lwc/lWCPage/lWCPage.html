@@ -10,27 +10,27 @@
                 <template if:true={accounts}>
                     <template for:each={accounts} for:item="account">
                         <div key={account.Id} class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2 slds-large-size_1-of-4 slds-var-p-around_small">
-                            <div class="slds-box slds-box_link slds-theme_default slds-var-p-around_small">
+                            <div class="cardStyle slds-box slds-box_link slds-theme_default slds-var-p-around_medium"> 
                                 <div class="slds-text-heading_medium">
                                     <lightning-button variant="base" label={account.Name} data-id={account.Id}
                                         onclick={navigateToAccount} class="slds-var-m-right_x-small">
                                     </lightning-button>
                                 </div>
                                 <div class="slds-var-m-top_small slds-text-body_small">
-                                    <strong>Ticker Symbol:</strong> {account.TickerSymbol}
+                                    <strong>{label.tickerSymbolLabel}:</strong> {account.TickerSymbol}
                                 </div>
                                 <div class="slds-var-m-top_small slds-text-body_small">
-                                    <strong>Annual Revenue:</strong> <lightning-formatted-number format-style="currency"
+                                    <strong>{label.annualRevenueLabel}: </strong> <lightning-formatted-number format-style="currency"
                                         value={account.AnnualRevenue}
                                         minimum-fraction-digits="0"></lightning-formatted-number>
                                 </div>
                                 <div class="slds-var-m-top_small slds-text-body_small">
-                                    <strong>Business Users:</strong> {account.Business_Users__c}
+                                    <strong>{label.businessUsersLabel}:</strong> {account.Business_Users__c}
                                 </div>
                                 <div class="slds-var-m-top_small slds-text-body_small">
-                                    <strong>Decision Makers:</strong> {account.Decision_Makers__c}
+                                    <strong>{label.decisionMakersLabel}:</strong> {account.Decision_Makers__c}
                                 </div>
-                                <c-l-w-c-account-card-tab-set account-id={account.Id} account-contact-relations={account.AccountContactRelations}></c-l-w-c-account-card-tab-set>
+                                <c-l-w-c-account-card-tab-set account={account}></c-l-w-c-account-card-tab-set> 
                             </div>
                         </div>
                     </template>
