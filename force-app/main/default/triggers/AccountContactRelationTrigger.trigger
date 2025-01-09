@@ -1,3 +1,3 @@
-trigger AccountContactRelationTrigger on AccountContactRelation (before insert, after insert, before update, after update) {
+trigger AccountContactRelationTrigger on AccountContactRelation (after insert, after update, after delete) {
 new AccountContactRelationTriggerHandler().run();
 }

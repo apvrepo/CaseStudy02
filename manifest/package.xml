@@ -6,7 +6,47 @@
 	</types>
 	<types>
 		<members>*</members>
-		<name>StaticResource</name>
+		<name>ApexTrigger</name>
+	</types>
+	<types>
+		<members>AnnualRevenueLabel</members>
+		<members>BusinessUsersLabel</members>
+		<members>ContactRelationsLabel</members>
+		<members>ContactsLabel</members>
+		<members>CreatedDateLabel</members>
+		<members>DecisionMakersLabel</members>
+		<members>OpportunitiesLabel</members>
+		<members>TickerSymbolLabel</members>
+		<name>CustomLabel</name>
+	</types>
+	<types>
+		<members>*</members>
+		<name>CustomLabels</name>
+	</types>
+	<types>
+		<members>Account</members>
+		<name>CustomObject</name>
+	</types>
+	<types>
+		<members>Accounts_Panel</members>
+		<members>LightningSales_UtilityBar</members>
+		<name>FlexiPage</name>
+	</types>
+	<types>
+		<members>*</members>
+		<name>HomePageLayout</name>
+	</types>
+	<!--   
+	<types>
+		<members>Account-Account %28Sales%29 Layout</members>
+		<members>Account-Account Layout</members>
+		<name>Layout</name>
+	</types>
+	-->
+	<types>
+		<members>lWCAccountCardTabSet</members>
+		<members>lWCPage</members>
+		<name>LightningComponentBundle</name>
 	</types>
 	<version>62.0</version>
 </Package>

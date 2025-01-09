@@ -1,9 +1,9 @@
-/* @Description  This ServiceTerritoryMemberTriggerHandler class executes the logics based on the ServiceTerritoryMemberTrigger events.
+/* @Description  This AccountTriggerHandler class executes the logics based on the AccountTrigger events.
 *******************************************************************************************/
 /* MODIFICATION LOG
 * Version          Developer          Date               Description
 *-------------------------------------------------------------------------------------------
-*  1.0            Andres Pereyra      01/12/2024          Initial Creation - User Story: 'Assigment Salesforce Developer'                                                     
+*  1.0            Andres Pereyra      06/01/2025          Initial Creation                                                     
 *******************************************************************************************/
 
 public without sharing class AccountTriggerHandler extends TriggerHandler {
@@ -13,13 +13,5 @@ public without sharing class AccountTriggerHandler extends TriggerHandler {
     public AccountTriggerHandler() {
         this.newAccountList = trigger.new;
     }
-    /*
-        // Instance of the Apex Class 'ServiceTerritoryMemberHelper':
-    private ServiceTerritoryMemberHelper serviceTerritoryMemberHelper = new ServiceTerritoryMemberHelper();
-    
-    public override void beforeInsert() {
-        serviceTerritoryMemberHelper.validateDates(newServiceTerritoryMemberList);
-    }
-    */
     
 }
