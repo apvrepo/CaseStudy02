@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>AnnualRevenueLabel</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Annual Revenue Label</shortDescription>
+        <value>Annual Revenue</value>
+    </labels>
+    <labels>
+        <fullName>BusinessUsersLabel</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Business Users Label</shortDescription>
+        <value>Business Users</value>
+    </labels>
+    <labels>
+        <fullName>ContactRelationsLabel</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Contact Relations Label</shortDescription>
+        <value>Contact Relations</value>
+    </labels>
+    <labels>
+        <fullName>ContactsLabel</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Contacts Label</shortDescription>
+        <value>Contacts</value>
+    </labels>
+    <labels>
+        <fullName>CreatedDateLabel</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Created Date Label</shortDescription>
+        <value>Created Date</value>
+    </labels>
+    <labels>
+        <fullName>DecisionMakersLabel</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Decision Makers Label</shortDescription>
+        <value>Decision Makers</value>
+    </labels>
+    <labels>
+        <fullName>OpportunitiesLabel</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Opportunities Label</shortDescription>
+        <value>Opportunities</value>
+    </labels>
+    <labels>
+        <fullName>TickerSymbolLabel</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Ticker Symbol Label</shortDescription>
+        <value>Ticker Symbol</value>
+    </labels>
+</CustomLabels>
