@@ -76,12 +76,24 @@ This feature, often referred to as ‘Contacts to Multiple Accounts’, allows a
 
 2. **Deploy Source to target Org**:
   - You can achieve this by right-click on the 'package.xml' file and select option 'SFDX: Deploy Source in Manifest to Org' or
-  you can deploy individual components one by one by doing right click on the desire component and selecting the option '
+  you can deploy individual components one by one by doing right-click on the desire component and selecting the option '
   SFDX: Deploy this Source to Org'
 
 ### POST-Deploy Steps:
 
-1. **Initialize the sums in the custom fields of the Account records by executing anonymously the code of the Apex Class 'InitializeAccountSums.cls'**
+1. **Manually Activate the Flexipage 'Accounts_Panel'**
+- Go to 'Setup' --> 'User Interface' --> 'Lightning App Builder'
+- Search for the Lightning Page with name 'Accounts_Panel' and click the option 'Edit' 
+- Click on the button 'Activation...' (on the right top corner of the screen) 
+- Click on the tab 'App Default' 
+- Click on the button 'Assign to Apps' 
+- Select the app woith App Name 'Sales' 
+- Click 'Next'
+- Click 'Save'
+- Click 'Save' (button next to the previous 'Activation...')
+- LogOut from the Org, refresh the browser tab (CTRL+F5) and LogIn back again.
+
+2. **Initialize the sums in the custom fields of the Account records by executing anonymously the code of the Apex Class 'InitializeAccountSums.cls'**
 - Open Developer Console
 - Click 'Debug'  --> 'Open Execute Anonymous Window' 
 - Copy and paste the following code: 
