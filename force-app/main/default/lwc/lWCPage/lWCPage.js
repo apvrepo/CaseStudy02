@@ -8,7 +8,7 @@
 *******************************************************************************************/
 
 import { LightningElement, wire, track, api } from 'lwc';
-import getAccountData from '@salesforce/apex/AccountHelper.getAccounts';
+import getAccountData from '@salesforce/apex/AccountController.getAccounts';
 import { NavigationMixin } from 'lightning/navigation';
 // Import custom labels
 import tickerSymbolLabel from "@salesforce/label/c.TickerSymbolLabel";

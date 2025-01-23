@@ -48,18 +48,15 @@ public without sharing class AccountContactRelationTriggerHandler extends Trigge
             }
         }
     }
-
-    // Instance of the Apex Class 'AccountHelper':
-    private AccountHelper accountHelperClass = new AccountHelper();
-    
+  
     public override void afterInsert() {
-        accountHelperClass.updateAccountRolesCounts(accountContactRelationListToProcess);
-        accountHelperClass.updateAccountRelatedObjectsCounts(accountIdsToUpdate, RELATED_OBJECT_NAME);
+        AccountHelper.updateAccountRolesCounts(accountContactRelationListToProcess);
+        AccountHelper.updateAccountRelatedObjectsCounts(accountIdsToUpdate, RELATED_OBJECT_NAME);
     }
     
     public override void afterUpdate() {
-        accountHelperClass.updateAccountRolesCounts(accountContactRelationListToProcess);
-        accountHelperClass.updateAccountRelatedObjectsCounts(accountIdsToUpdate, RELATED_OBJECT_NAME);
+        AccountHelper.updateAccountRolesCounts(accountContactRelationListToProcess);
+        AccountHelper.updateAccountRelatedObjectsCounts(accountIdsToUpdate, RELATED_OBJECT_NAME);
     }
     
 }

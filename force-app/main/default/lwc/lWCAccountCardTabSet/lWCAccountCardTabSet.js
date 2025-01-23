@@ -8,8 +8,8 @@ accordion sections in the 'LWCPage' Account records.
 *******************************************************************************************/
 
 import { LightningElement, wire, track, api } from 'lwc';
-import getContactsData from '@salesforce/apex/AccountHelper.getSingleAccountRelatedContacts';
-import getOpportunitiesData from '@salesforce/apex/AccountHelper.getSingleAccountRelatedOportunitties';
+import getContactsData from '@salesforce/apex/AccountController.getSingleAccountRelatedContacts';
+import getOpportunitiesData from '@salesforce/apex/AccountController.getSingleAccountRelatedOportunitties';
 import { NavigationMixin } from 'lightning/navigation';
 // Import custom labels
 import createdDateLabel from "@salesforce/label/c.CreatedDateLabel";
