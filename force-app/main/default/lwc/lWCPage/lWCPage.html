@@ -17,18 +17,18 @@
                                     </lightning-button>
                                 </div>
                                 <div class="slds-var-m-top_small slds-text-body_small">
-                                    <strong>{label.tickerSymbolLabel}:</strong> {account.TickerSymbol}
+                                    <strong>{tickerSymbolLabel}:</strong> {account.TickerSymbol}
                                 </div>
                                 <div class="slds-var-m-top_small slds-text-body_small">
-                                    <strong>{label.annualRevenueLabel}: </strong> <lightning-formatted-number format-style="currency"
+                                    <strong>{annualRevenueLabel}: </strong> <lightning-formatted-number format-style="currency"
                                         value={account.AnnualRevenue}
                                         minimum-fraction-digits="0"></lightning-formatted-number>
                                 </div>
                                 <div class="slds-var-m-top_small slds-text-body_small">
-                                    <strong>{label.businessUsersLabel}:</strong> {account.Business_Users__c}
+                                    <strong>{businessUsersLabel}:</strong> {account.Business_Users__c}
                                 </div>
                                 <div class="slds-var-m-top_small slds-text-body_small">
-                                    <strong>{label.decisionMakersLabel}:</strong> {account.Decision_Makers__c}
+                                    <strong>{decisionMakersLabel}:</strong> {account.Decision_Makers__c}
                                 </div>
                                 <c-l-w-c-account-card-tab-set account={account}></c-l-w-c-account-card-tab-set> 
                             </div>

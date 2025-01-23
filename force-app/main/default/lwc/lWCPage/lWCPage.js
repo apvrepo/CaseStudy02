@@ -10,23 +10,31 @@
 import { LightningElement, wire, track, api } from 'lwc';
 import getAccountData from '@salesforce/apex/AccountController.getAccounts';
 import { NavigationMixin } from 'lightning/navigation';
-// Import custom labels
-import tickerSymbolLabel from "@salesforce/label/c.TickerSymbolLabel";
-import annualRevenueLabel from "@salesforce/label/c.AnnualRevenueLabel";
-import businessUsersLabel from "@salesforce/label/c.BusinessUsersLabel";
-import decisionMakersLabel from "@salesforce/label/c.DecisionMakersLabel";
+import getStandardLabels from '@salesforce/apex/AccountController.getStandardLabels';
 
 
 export default class LWCPage extends NavigationMixin(LightningElement) {
     @track loaded = false;
     @track accounts;
- // Expose the labels to use in the template.
- label = {
-    tickerSymbolLabel,
-    annualRevenueLabel, 
-    businessUsersLabel, 
-    decisionMakersLabel
-  };
+
+  @track labels;
+  @track tickerSymbolLabel;
+  @track annualRevenueLabel;
+  @track businessUsersLabel;
+  @track decisionMakersLabel;
+
+  @wire(getStandardLabels)
+  wiredLabels({ error, data }) {
+      if (data) {
+          this.labels = data;
+          this.tickerSymbolLabel = data['TickerSymbol'];
+          this.annualRevenueLabel = data['AnnualRevenue'];
+          this.businessUsersLabel = data['Business_Users__c'];
+          this.decisionMakersLabel = data['Decision_Makers__c'];
+      } else if (error) {
+          console.error(error);
+      }
+  }
 
 
     // LIFECYCLE HOOKS:

@@ -40,4 +40,20 @@ public without sharing class AccountController {
             ORDER BY Name ASC
         ];
     }
+    @AuraEnabled(cacheable=true)
+    public static Map<String, String> getStandardLabels() {
+        Map<String, String> labels = new Map<String, String>();
+        // sObject Labels
+        labels.put('Opportunity', Schema.SObjectType.Opportunity.label);
+        labels.put('Contact', Schema.SObjectType.Contact.label);
+        labels.put('AccountContactRelation', Schema.SObjectType.AccountContactRelation.label);
+        // Field Labels
+        labels.put('CreatedDate', Schema.SObjectType.Contact.fields.CreatedDate.label);
+        labels.put('TickerSymbol', Schema.SObjectType.Account.fields.TickerSymbol.label);
+        labels.put('AnnualRevenue', Schema.SObjectType.Account.fields.AnnualRevenue.label);
+        labels.put('Business_Users__c', Schema.SObjectType.Account.fields.Business_Users__c.label);
+        labels.put('Decision_Makers__c', Schema.SObjectType.Account.fields.Decision_Makers__c.label);
+        return labels;
+    }
+    
 }

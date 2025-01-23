@@ -11,11 +11,8 @@ import { LightningElement, wire, track, api } from 'lwc';
 import getContactsData from '@salesforce/apex/AccountController.getSingleAccountRelatedContacts';
 import getOpportunitiesData from '@salesforce/apex/AccountController.getSingleAccountRelatedOportunitties';
 import { NavigationMixin } from 'lightning/navigation';
-// Import custom labels
-import createdDateLabel from "@salesforce/label/c.CreatedDateLabel";
-import contactRelationsLabel from "@salesforce/label/c.ContactRelationsLabel";
-import contactsLabel from "@salesforce/label/c.ContactsLabel";
-import opportunitiesLabel from "@salesforce/label/c.OpportunitiesLabel";
+import getStandardLabels from '@salesforce/apex/AccountController.getStandardLabels';
+
 
 export default class LWCAccountCardTabSet extends NavigationMixin(LightningElement) {
     @api account;
@@ -24,15 +21,24 @@ export default class LWCAccountCardTabSet extends NavigationMixin(LightningEleme
     @track accountOpportunitiesSum;
     @track contacts;
     @track opportunities;
-    @track section = '';
+    @track labels;
+    @track createdDateLabel;
+    @track contactRelationsLabel;
+    @track contactsLabel;
+    @track opportunitiesLabel;
 
-    // Expose the labels to use in the template.
-    label = {
-        createdDateLabel,
-        contactRelationsLabel,
-        contactsLabel,
-        opportunitiesLabel
-    };
+    @wire(getStandardLabels)
+    wiredLabels({ error, data }) {
+        if (data) {
+            this.labels = data;
+            this.createdDateLabel = data['CreatedDate'];
+            this.contactRelationsLabel = data['AccountContactRelation'];
+            this.contactsLabel = data['Contact'];
+            this.opportunitiesLabel = data['Opportunity'];
+        } else if (error) {
+            console.error(error);
+        }
+    }
 
     // LIFECYCLE HOOKS:
     connectedCallback() {
@@ -106,7 +112,7 @@ export default class LWCAccountCardTabSet extends NavigationMixin(LightningEleme
         } else {
             aRASum = 0;
         }
-        return this.label.contactRelationsLabel + ' (' + (aRASum) + ')';
+        return this.contactRelationsLabel + ' (' + (aRASum) + ')';
     }
 
     get contactsAccordionLabel() {
@@ -119,7 +125,7 @@ export default class LWCAccountCardTabSet extends NavigationMixin(LightningEleme
             cASum = 0;
         }
 
-        return this.label.contactsLabel + ' (' + (cASum) + ')';
+        return this.contactsLabel + ' (' + (cASum) + ')';
     }
 
     get oppurtunitiesAccordionLabel() {
@@ -132,7 +138,7 @@ export default class LWCAccountCardTabSet extends NavigationMixin(LightningEleme
         } else {
             oASum = 0;
         }
-        return this.label.opportunitiesLabel + ' (' + (oASum) + ')';       // this.opportunities.length 
+        return this.opportunitiesLabel + ' (' + (oASum) + ')';       // this.opportunities.length 
     }
 
 }
