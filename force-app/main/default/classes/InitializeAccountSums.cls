@@ -45,10 +45,10 @@ public class InitializeAccountSums implements Database.Batchable<SObject>, Datab
                 if (acr.Roles != null && acr.Roles != '') {
                     List<String> roles = acr.Roles.split(';');
                     for (String role : roles) {
-                        if (role.equals('Decision Maker')) { // Decision Maker - Besluitvormer
+                        if (role.equals('Decision Maker')) { // Besluitvormer  --> Decision Maker
                             decisionMakersCount++;
                         } 
-                        if (role.equals('Business User')) { // Business User - Zakelijke gebruiker
+                        if (role.equals('Business User')) { // Zakelijke gebruiker --> Business User
                             businessUsersCount++;
                         }
                     }

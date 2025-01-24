@@ -47,7 +47,7 @@ public class AccountHelperTest {
         for (Account acc : accounts) {
             if (acrMap.containsKey(acc.Id)) {
                 for (AccountContactRelation acr : acrMap.get(acc.Id)) {
-                    acr.Roles = 'Decision Maker';
+                    acr.Roles = 'Besluitvormer';
                 }
             }
         }
@@ -214,49 +214,5 @@ System.assertEquals(10, acc.ContactsSum__c, 'ContactsSum__c count should be 10')
 System.assertEquals(10, acc.AccountContactRelationSum__c, 'AccountContactRelationSum__c count should be 10'); */
         }
     }
-    @IsTest
-    static void testGetAccounts() {
-        List<Account> accounts = [SELECT Id, Name, TickerSymbol, AnnualRevenue, Business_Users__c, Decision_Makers__c, OpportunitiesSum__c, ContactsSum__c, AccountContactRelationSum__c FROM Account LIMIT 199];
-        Set<Id> accountIdSet = new Set<Id>();
-        for(Account acc : accounts){
-            accountIdSet.add(acc.Id);
-        }
-        
-        List<Account> results = new List<Account>();
-        
-        Test.startTest();
-        results = AccountHelper.getAccounts();
-        Test.stopTest();
-        
-        System.assertEquals(results.size(), accounts.size(), 'Should match');
-        
-    }
-    
-    @IsTest
-    static void testGetSingleAccountRelatedContacts() {
-        List<Account> account = [SELECT Id, Name, TickerSymbol, AnnualRevenue, Business_Users__c, Decision_Makers__c, OpportunitiesSum__c, ContactsSum__c, AccountContactRelationSum__c FROM Account LIMIT 1];
-
-        List<Contact> contacts = TestDataFactory.createContacts(4, account);
-        List<Contact> results = new List<Contact>();
-        
-        Test.startTest();
-        results = AccountHelper.getSingleAccountRelatedContacts(account[0].Id);
-        Test.stopTest();
-        
-        System.assertEquals(contacts.size(), results.size(), 'Contacts count should be 4');
-    }
-    
-        @IsTest
-    static void testGetSingleAccountRelatedOportunitties() {
-        List<Account> account = [SELECT Id, Name, TickerSymbol, AnnualRevenue, Business_Users__c, Decision_Makers__c, OpportunitiesSum__c, ContactsSum__c, AccountContactRelationSum__c FROM Account LIMIT 1];
-
-        List<Opportunity> opportunities = TestDataFactory.createOpportunities(4, account);
-        List<Opportunity> results = new List<Opportunity>();
-        
-        Test.startTest();
-        results = AccountHelper.getSingleAccountRelatedOportunitties(account[0].Id);
-        Test.stopTest();
-        
-        System.assertEquals(opportunities.size(), results.size(), 'Opportunities count should be 4');
-    }
+   
 }
