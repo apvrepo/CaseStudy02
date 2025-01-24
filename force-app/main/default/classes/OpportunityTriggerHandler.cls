@@ -51,18 +51,15 @@ public without sharing class OpportunityTriggerHandler extends TriggerHandler {
         }
     }
 
-    // Instance of the Apex Class 'AccountHelper':
-    private AccountHelper accountHelperClass = new AccountHelper();
-
     public override void afterInsert() {
-        accountHelperClass.updateAccountRelatedObjectsCounts(accountIdsToUpdate, RELATED_OBJECT_NAME);
+        AccountHelper.updateAccountRelatedObjectsCounts(accountIdsToUpdate, RELATED_OBJECT_NAME);
     }
 
     public override void afterUpdate() {
-        accountHelperClass.updateAccountRelatedObjectsCounts(accountIdsToUpdate, RELATED_OBJECT_NAME);
+        AccountHelper.updateAccountRelatedObjectsCounts(accountIdsToUpdate, RELATED_OBJECT_NAME);
     }
 
     public override void afterDelete() {
-        accountHelperClass.updateAccountRelatedObjectsCounts(accountIdsToUpdate, RELATED_OBJECT_NAME);
+        AccountHelper.updateAccountRelatedObjectsCounts(accountIdsToUpdate, RELATED_OBJECT_NAME);
     }
 }

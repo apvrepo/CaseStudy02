@@ -8,31 +8,39 @@ accordion sections in the 'LWCPage' Account records.
 *******************************************************************************************/
 
 import { LightningElement, wire, track, api } from 'lwc';
-import getContactsData from '@salesforce/apex/AccountHelper.getSingleAccountRelatedContacts';
-import getOpportunitiesData from '@salesforce/apex/AccountHelper.getSingleAccountRelatedOportunitties';
+import getContactsData from '@salesforce/apex/AccountController.getSingleAccountRelatedContacts';
+import getOpportunitiesData from '@salesforce/apex/AccountController.getSingleAccountRelatedOportunitties';
 import { NavigationMixin } from 'lightning/navigation';
-// Import custom labels
-import createdDateLabel from "@salesforce/label/c.CreatedDateLabel";
-import contactRelationsLabel from "@salesforce/label/c.ContactRelationsLabel";
-import contactsLabel from "@salesforce/label/c.ContactsLabel";
-import opportunitiesLabel from "@salesforce/label/c.OpportunitiesLabel";
+import getStandardLabels from '@salesforce/apex/AccountController.getStandardLabels';
+
+
 
 export default class LWCAccountCardTabSet extends NavigationMixin(LightningElement) {
     @api account;
+    @api labels;
     @track accountContactRelationsSum;
     @track accountContactsSum;
     @track accountOpportunitiesSum;
     @track contacts;
     @track opportunities;
-    @track section = '';
 
-    // Expose the labels to use in the template.
-    label = {
-        createdDateLabel,
-        contactRelationsLabel,
-        contactsLabel,
-        opportunitiesLabel
-    };
+    CREATED_DATE_LABEL = '';
+    CONTACT_RELATIONS_LABEL = '';
+    CONTACTS_LABEL = '';
+    OPPORTUNITIES_LABEL = '';
+
+    // Wire the Apex method to fetch standard labels
+    @wire(getStandardLabels)
+    wiredLabels({ error, data }) {
+        if (data) {
+            this.CREATED_DATE_LABEL = data['CreatedDate'];
+            this.CONTACT_RELATIONS_LABEL = data['AccountContactRelation'];
+            this.CONTACTS_LABEL = data['Contact'];
+            this.OPPORTUNITIES_LABEL = data['Opportunity'];
+        } else if (error) {
+            console.error(error);
+        }
+    }
 
     // LIFECYCLE HOOKS:
     connectedCallback() {
@@ -106,7 +114,7 @@ export default class LWCAccountCardTabSet extends NavigationMixin(LightningEleme
         } else {
             aRASum = 0;
         }
-        return this.label.contactRelationsLabel + ' (' + (aRASum) + ')';
+        return this.CONTACT_RELATIONS_LABEL + ' (' + (aRASum) + ')';
     }
 
     get contactsAccordionLabel() {
@@ -119,7 +127,7 @@ export default class LWCAccountCardTabSet extends NavigationMixin(LightningEleme
             cASum = 0;
         }
 
-        return this.label.contactsLabel + ' (' + (cASum) + ')';
+        return this.CONTACTS_LABEL + ' (' + (cASum) + ')';
     }
 
     get oppurtunitiesAccordionLabel() {
@@ -132,7 +140,8 @@ export default class LWCAccountCardTabSet extends NavigationMixin(LightningEleme
         } else {
             oASum = 0;
         }
-        return this.label.opportunitiesLabel + ' (' + (oASum) + ')';       // this.opportunities.length 
+        return this.OPPORTUNITIES_LABEL + ' (' + (oASum) + ')';       // this.opportunities.length 
     }
 
 }
+
