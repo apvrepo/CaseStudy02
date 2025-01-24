@@ -25,6 +25,7 @@
 	</types>
 	<types>
 		<members>Account</members>
+		<members>Account_Change_Event__e</members>
 		<name>CustomObject</name>
 	</types>
 	<types>

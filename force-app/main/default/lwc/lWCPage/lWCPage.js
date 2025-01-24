@@ -63,8 +63,6 @@ export default class LWCPage extends NavigationMixin(LightningElement) {
         }
     }
 
-
-
     // Handles subscribe button click
     handleSubscription() {
         // Callback invoked whenever a new event message is received
@@ -72,21 +70,16 @@ export default class LWCPage extends NavigationMixin(LightningElement) {
             // Refresh the wired accounts data
             refreshApex(this.wiredAccountsResult)
                 .then(() => {
-                    console.log('Account data refreshed successfully');
+                  //  console.log('Account data refreshed successfully');
                 })
                 .catch((error) => {
-                    console.error('Error refreshing accounts:', error);
+                  //  console.error('Error refreshing accounts:', error);
                 });
-
         };
-
         // Invoke subscribe method of empApi. Pass reference to messageCallback
         subscribe(this.channelName, -1, messageCallback).then((response) => {
             // Response contains the subscription information on subscribe call
-            console.log(
-                'Subscription request sent to: ',
-                JSON.stringify(response.channel)
-            );
+         //   console.log('Subscription request sent to: ', JSON.stringify(response.channel));
             this.subscription = response;
         });
     }
@@ -106,9 +99,9 @@ export default class LWCPage extends NavigationMixin(LightningElement) {
     handleUnsubscription() {
         if (this.subscription && this.subscription.channel) {
             unsubscribe(this.subscription, (response) => {
-                console.log('Unsubscribed from channel:', response);
+               // console.log('Unsubscribed from channel:', response);
             }).catch((error) => {
-                console.error('Error during unsubscription:', error);
+              //  console.error('Error during unsubscription:', error);
             });
         }
     }
