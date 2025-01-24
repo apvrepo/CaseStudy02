@@ -1,4 +1,3 @@
-
 /* @Description  This LWCPage is a Custom Lightning Web Component that displays a list of Account records.
 *******************************************************************************************/
 /* MODIFICATION LOG
