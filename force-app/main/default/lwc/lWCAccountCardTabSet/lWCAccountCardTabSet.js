@@ -14,27 +14,29 @@ import { NavigationMixin } from 'lightning/navigation';
 import getStandardLabels from '@salesforce/apex/AccountController.getStandardLabels';
 
 
+
 export default class LWCAccountCardTabSet extends NavigationMixin(LightningElement) {
     @api account;
+    @api labels;
     @track accountContactRelationsSum;
     @track accountContactsSum;
     @track accountOpportunitiesSum;
     @track contacts;
     @track opportunities;
-    @track labels;
-    @track createdDateLabel;
-    @track contactRelationsLabel;
-    @track contactsLabel;
-    @track opportunitiesLabel;
 
+    CREATED_DATE_LABEL = '';
+    CONTACT_RELATIONS_LABEL = '';
+    CONTACTS_LABEL = '';
+    OPPORTUNITIES_LABEL = '';
+
+    // Wire the Apex method to fetch standard labels
     @wire(getStandardLabels)
     wiredLabels({ error, data }) {
         if (data) {
-            this.labels = data;
-            this.createdDateLabel = data['CreatedDate'];
-            this.contactRelationsLabel = data['AccountContactRelation'];
-            this.contactsLabel = data['Contact'];
-            this.opportunitiesLabel = data['Opportunity'];
+            this.CREATED_DATE_LABEL = data['CreatedDate'];
+            this.CONTACT_RELATIONS_LABEL = data['AccountContactRelation'];
+            this.CONTACTS_LABEL = data['Contact'];
+            this.OPPORTUNITIES_LABEL = data['Opportunity'];
         } else if (error) {
             console.error(error);
         }
@@ -112,7 +114,7 @@ export default class LWCAccountCardTabSet extends NavigationMixin(LightningEleme
         } else {
             aRASum = 0;
         }
-        return this.contactRelationsLabel + ' (' + (aRASum) + ')';
+        return this.CONTACT_RELATIONS_LABEL + ' (' + (aRASum) + ')';
     }
 
     get contactsAccordionLabel() {
@@ -125,7 +127,7 @@ export default class LWCAccountCardTabSet extends NavigationMixin(LightningEleme
             cASum = 0;
         }
 
-        return this.contactsLabel + ' (' + (cASum) + ')';
+        return this.CONTACTS_LABEL + ' (' + (cASum) + ')';
     }
 
     get oppurtunitiesAccordionLabel() {
@@ -138,7 +140,8 @@ export default class LWCAccountCardTabSet extends NavigationMixin(LightningEleme
         } else {
             oASum = 0;
         }
-        return this.opportunitiesLabel + ' (' + (oASum) + ')';       // this.opportunities.length 
+        return this.OPPORTUNITIES_LABEL + ' (' + (oASum) + ')';       // this.opportunities.length 
     }
 
 }
+

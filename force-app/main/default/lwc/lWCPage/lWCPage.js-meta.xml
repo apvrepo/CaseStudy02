@@ -7,18 +7,4 @@
         <target>lightning__AppPage</target>
         <target>lightning__HomePage</target>
     </targets>
-    <!--
-        <targetConfigs>
-        <targetConfig targets="lightning__RecordPage">
-            <property name="recordId" type="String" />
-        </targetConfig>
-        <targetConfig targets="lightning__AppPage">
-            <property name="recordId" type="String" />
-        </targetConfig>
-        <targetConfig targets="lightning__HomePage">
-            <property name="recordId" type="String" />
-        </targetConfig>
-    </targetConfigs> 
-   
-    <runtimeNamespace>vlocity_cmt</runtimeNamespace>  -->
 </LightningComponentBundle>
